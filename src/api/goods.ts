@@ -8,9 +8,12 @@ export function getAll(): Promise<Good[]> {
 }
 
 export const get5First = () => {
-  return getAll().then(goods => goods); // sort and get the first 5
+  return getAll().then(goods => goods
+    .sort((g1, g2) => g1.name > g2.name ? 1 : g1.name < g2.name ? -1 : 0)
+    .slice(0, 5)
+  );
 };
 
 export const getRedGoods = () => {
-  return getAll().then(goods => goods); // get only red
+  return getAll().then(goods => goods.filter(g => g.color === 'red'));
 };
